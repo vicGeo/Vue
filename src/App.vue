@@ -12,9 +12,11 @@
             <h3 class="text-lg leading-6 font-medium text-gray-900">
               {{ firstName }} {{ lastName }}
             </h3>
-            <p class="text-sm text-gray-500">
-              <a href="#">
-              </a>
+            <p class="text-sm">
+                <timer class="text-green-500 relative inline-flex items-center text-xl"
+                :timer="formattedTime"
+                :state="timerState"
+                />
             </p>
           </div>
         </div>
@@ -43,9 +45,13 @@ import axios from 'axios';
 // Hardcoded token
 const token = '9a4c685e6fca0347ca0775119e9c47b6ba00e49096ba99ffcf6a41fe06e6f001';
 
+import Timer from './components/Timer.vue';
+
+
 export default {
   name: 'App',
   components: {
+    Timer,
 
   },
   data() {
@@ -55,6 +61,10 @@ export default {
       lastName: '',
       workStatus: '',
       employeeWorking: true,
+      timerState: 'stopped',
+      currentTimer: 0,
+      formattedTime: '00:00:00',
+      ticker: undefined,
     }
   },
   methods: {
@@ -69,7 +79,21 @@ export default {
       this.firstName = response.data.data[0].employee.firstName
       this.lastName = response.data.data[0].employee.lastName
       this.workStatus = response.data.data[0].employee.workStatus
-      console.log(response.data);
+    },
+
+    // Logic timer HH:MM:SS
+
+    tick() {
+      this.ticker = setInterval(() => {
+        this.currentTimer++;
+        this.formattedTime = this.formatTime(this.currentTimer);
+      }, 1000)
+    },
+    formatTime (seconds) {
+      let measuredTime = new Date(null);
+      measuredTime.setSeconds(seconds);
+      let HMSTime = measuredTime.toISOString().substr(11, 8);
+      return HMSTime;
     }
   },
   mounted() {
