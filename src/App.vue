@@ -81,6 +81,34 @@ export default {
       this.workStatus = response.data.data[0].employee.workStatus
     },
 
+    toogleInOut() {
+      this.employeeWorking = !this.employeeWorking;
+    },
+    async start() {
+      if (this.timerState !== 'running') {
+        this.tick();
+        this.timerState = 'running';
+
+        // POST workEntryIn
+        let workIn = {
+        "employeeId": "cf4e03eb-6945-4fa5-ada7-f902492303c4",
+          "workEntryIn": {
+            "coordinates": {
+              "latitude": null,
+              "longitude": null
+              }
+          }
+      }
+      let response = await axios.post("http://localhost:8080/schedule/v1/work-entries/clock-in", workIn, {
+        headers: {
+          Authorization: 'Bearer ' + token
+        }
+      })
+      console.log(response.data);
+
+      }
+    },
+
     // Logic timer HH:MM:SS
 
     tick() {
