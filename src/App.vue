@@ -6,7 +6,8 @@
       <div class="ml-4 mt-4">
         <div class="flex items-center">
           <div class="flex-shrink-0">
-            <img class="h-12 w-12 rounded-full" src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80" alt="" />
+            <avatar-employee/>
+            <!-- <img class="h-12 w-12 rounded-full" src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80" alt="" /> -->
           </div>
           <div class="ml-4">
             <h3 class="text-lg leading-6 font-medium text-gray-900">
@@ -32,6 +33,10 @@
           Entry Out
           </button>
         </div>
+        <drop-down class=""/>
+        <button v-on:click="stop(); toogleInOut();" class="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-full shadow-sm text-white bg-pink-600 hover:bg-pink-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-pink-500">
+          RESET TIME
+        </button>
       </div>
     </div>
   </div>
@@ -44,7 +49,8 @@ import axios from 'axios';
 const token = '9a4c685e6fca0347ca0775119e9c47b6ba00e49096ba99ffcf6a41fe06e6f001';
 
 import Timer from './components/Timer.vue';
-
+import AvatarEmployee from './components/AvatarEmployee.vue';
+import DropDown from './components/DropDown.vue';
 
 
 
@@ -52,6 +58,9 @@ export default {
   name: 'App',
   components: {
     Timer,
+    AvatarEmployee,
+    DropDown,
+
 
   },
   data() {
@@ -133,12 +142,10 @@ export default {
 
     async stop() {
 
-      if (this.timerState == 'running') {
         window.clearInterval(this.ticker);
         this.currentTimer = 0;
         this.formattedTime = "00:00:00"
         this.timerState = "stopped"
-      }
 
       // POST workEntryOutasync
       let workOut = {
