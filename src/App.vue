@@ -1,4 +1,5 @@
 <template>
+  <img src="./assets/sesame-hr.jpg">
   <header>
   <div class="bg-white px-4 py-5 border-b border-gray-200 sm:px-6">
     <div class="-ml-4 -mt-4 flex justify-between items-center flex-wrap sm:flex-nowrap">
@@ -38,6 +39,11 @@
   </header>
 </template>
 
+<script>
+export default {
+
+}
+</script>
 
 <style>
 
@@ -54,7 +60,7 @@
   margin: 3rem auto;
   border-radius: 10px;
   padding: 1rem;
-  background-color: #80CBC4;
+  background-color: #5EBEA3;
   color: white;
   text-align: center;
   width: 90%;
