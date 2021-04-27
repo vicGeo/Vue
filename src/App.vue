@@ -194,8 +194,8 @@ export default {
 #app header {
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.26);
   margin: 3rem auto;
-  border-radius: 10px;
-  padding: 1rem;
+  border-radius: 5px;
+  padding: .3rem;
   background-color: #5EBEA3;
   color: white;
   text-align: center;
