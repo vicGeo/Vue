@@ -13,7 +13,7 @@
               {{ firstName }} {{ lastName }}
             </h3>
             <p class="text-sm">
-                <timer class="text-green-500 relative inline-flex items-center text-xl"
+                <timer class="text-green-500 relative inline-flex items-center text-xl font-medium"
                 :timer="formattedTime"
                 :state="timerState"
                 />
@@ -22,18 +22,9 @@
         </div>
       </div>
       <div class="ml-4 mt-4 flex-shrink-0 flex">
-        <button type="button" class="relative inline-flex items-center px-4 py-2 border border-gray-300 shadow-sm text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-100">
-          <!-- <PhoneIcon class="-ml-1 mr-2 h-5 w-5 text-gray-400" aria-hidden="true" /> -->
-          <span>
-            EntryIn
-          </span>
-        </button>
-        <button type="button" class="ml-3 relative inline-flex items-center px-4 py-2 border border-gray-300 shadow-sm text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-100">
-          <!-- <MailIcon class="-ml-1 mr-2 h-5 w-5 text-gray-400" aria-hidden="true" /> -->
-          <span>
-            Reset Time
-          </span>
-        </button>
+        <basic-button-entry-in/>
+        <basic-button-entry-out/>
+
       </div>
     </div>
   </div>
@@ -46,12 +37,17 @@ import axios from 'axios';
 const token = '9a4c685e6fca0347ca0775119e9c47b6ba00e49096ba99ffcf6a41fe06e6f001';
 
 import Timer from './components/Timer.vue';
+import BasicButtonEntryIn from './components/BasicButtonEntryIn.vue';
+import BasicButtonEntryOut from './components/BasicButtonEntryOut.vue';
+
 
 
 export default {
   name: 'App',
   components: {
     Timer,
+    BasicButtonEntryIn,
+    BasicButtonEntryOut,
 
   },
   data() {
