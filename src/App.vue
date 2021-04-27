@@ -10,11 +10,10 @@
           </div>
           <div class="ml-4">
             <h3 class="text-lg leading-6 font-medium text-gray-900">
-              Tom Cook
+              {{ firstName }} {{ lastName }}
             </h3>
             <p class="text-sm text-gray-500">
               <a href="#">
-                @tom_cook
               </a>
             </p>
           </div>
@@ -40,7 +39,43 @@
 </template>
 
 <script>
+import axios from 'axios';
+// Hardcoded token
+const token = '9a4c685e6fca0347ca0775119e9c47b6ba00e49096ba99ffcf6a41fe06e6f001';
+
 export default {
+  name: 'App',
+  components: {
+
+  },
+  data() {
+    return {
+
+      firstName: '',
+      lastName: '',
+      workStatus: '',
+      employeeWorking: true,
+    }
+  },
+  methods: {
+    async getEntries() {
+      let response = await axios.get("http://localhost:8080/schedule/v1/work-entries", {
+        headers: {
+          Authorization: 'Bearer ' + token
+        },
+      });
+
+      // Testing render data from API
+      this.firstName = response.data.data[0].employee.firstName
+      this.lastName = response.data.data[0].employee.lastName
+      this.workStatus = response.data.data[0].employee.workStatus
+      console.log(response.data);
+    }
+  },
+  mounted() {
+      this.getEntries();
+  },
+
 
 }
 </script>
